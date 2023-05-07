@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Form.css';
+import { useTelegram } from '../hooks/useTelegram';
 
 const Form = () => {
 	const [country, setCountry] = useState('');
 	const [street, setStreet] = useState('');
 	const [subject, setSubject] = useState('physical');
+	const { tg } = useTelegram();
+
+	useEffect(() => {
+		tg.MainButton.setParams({
+			text: 'Кнопочка'
+		})
+	}, [tg.MainButton])
+	useEffect(() => {
+		if (!street || !country) {
+			tg.MainButton.hide()
+		} else {
+			tg.MainButton.show()
+		}
+	}, [street, country, tg.MainButton])
+
 
 	const onChangeCountry = (e) => {
 		setCountry(e.target.value)
