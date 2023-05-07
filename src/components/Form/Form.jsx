@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './from.css';
+import './Form.css';
 
 const Form = () => {
 	const [country, setCountry] = useState('');
